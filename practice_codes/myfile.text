@@ -1,0 +1,11 @@
+Hello This is a text file
+this is the second line
+this is the third line
+
+# Writing myfile.txt
+
+# myfile = open('myfile.text')
+
+myfile.read()
+# myfile.seek(0)
+# myfile.read()
