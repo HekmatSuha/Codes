@@ -17,7 +17,7 @@ class Cache:
 
         hit = self.cache[cache_index] == block_index
         self.cache[cache_index] = block_index
-        
+
         return hit
 
 def simulate_algorithm(memory, cache, algorithm):
@@ -70,23 +70,35 @@ def simulate_algorithm(memory, cache, algorithm):
     return total_accesses, hits, misses, hit_rate, miss_rate
 
 def main():
-    # Hardcoded values for simplicity; you can change them as needed
-    N = 4  # Should be power of 2
-    M = 4  # Should be power of 2
-    K = 4  # Should be power of 2 and K <= NxM / 4
+    try:
+        N = int(input("Enter N (power of 2): "))
+        M = int(input("Enter M (power of 2): "))
+        K = int(input("Enter cache block size (power of 2 and <= NxM / 4): "))
 
-    memory = [[Color() for _ in range(M)] for _ in range(N)]
-    cache = Cache(block_size=K, num_blocks=(N * M) // (4 * K))
+        if not (N & (N - 1) == 0 and N > 0):
+            raise ValueError("N is not a power of 2")
+        if not (M & (M - 1) == 0 and M > 0):
+            raise ValueError("M is not a power of 2")
+        if not (K & (K - 1) == 0 and K > 0):
+            raise ValueError("K is not a power of 2")
+        if not (K <= (N * M) // 4):
+            raise ValueError("K should be <= NxM / 4")
 
-    for algorithm in range(1, 4):
-        total_accesses, hits, misses, hit_rate, miss_rate = simulate_algorithm(memory, cache, algorithm)
-        print(f"Algorithm {algorithm}:")
-        print(f"Total Accesses: {total_accesses}")
-        print(f"Hits: {hits}")
-        print(f"Misses: {misses}")
-        print(f"Hit Rate: {hit_rate:.2f}")
-        print(f"Miss Rate: {miss_rate:.2f}")
-        print()
+        memory = [[Color() for _ in range(M)] for _ in range(N)]
+        cache = Cache(block_size=K, num_blocks=(N * M) // (4 * K))
+
+        for algorithm in range(1, 4):
+            total_accesses, hits, misses, hit_rate, miss_rate = simulate_algorithm(memory, cache, algorithm)
+            print(f"Algorithm {algorithm}:")
+            print(f"Total Accesses: {total_accesses}")
+            print(f"Hits: {hits}")
+            print(f"Misses: {misses}")
+            print(f"Hit Rate: {hit_rate:.2f}")
+            print(f"Miss Rate: {miss_rate:.2f}")
+            print()
+
+    except ValueError as ve:
+        print(f"Input error: {ve}")
 
 if __name__ == "__main__":
     main()
