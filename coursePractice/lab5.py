@@ -61,7 +61,7 @@ class AssemblyInterpreter:
 # Example usage
 interpreter = AssemblyInterpreter()
 instructions = """
-VAR_A DB 7
+VAR_A DB 8
 VAR_B DB 1
 ADD VAR_A VAR_B
 INC VAR_A
