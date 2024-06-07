@@ -66,5 +66,7 @@ VAR_B DB 1
 ADD VAR_A VAR_B
 INC VAR_A
 """
+
 interpreter.execute(instructions)
 interpreter.print_variables()
+
